@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bingocard {
+            display: grid;
+            /* gridは5列になるように設定する */
+            grid-template-columns: repeat(5,1fr);
+            width: 500px;
+            margin: 20px;
+        }
+        .bingocard div {
+            height: 100px;
+            width: 100px;
+            text-align: center;
+            line-height: 90px;
+            border: 1px solid black;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bingocard">
+    </div>
+    
+</body>
+<script>
+    checkList = []
+
+const makeMasu = (i) => {
+    const masu = document.createElement("div");
+
+    // コマの番号を５で割った余りからどの列かを出す
+    const col = i % 5;
+    const randomNumber = Math.floor(Math.random() * 15 + col * 15 + 1);
+
+    checkList.push(randomNumber);
+    masu.textContent = randomNumber;
+
+    masu.addEventListener("click", (evt) => {
+        evt.target.textContent = "◯";
+        checkList[i] = "◯"
+        // 期待通りにcheckListが動いているか確認
+        console.log(checkList)
+    })
+    document.querySelector(".bingocard").appendChild(masu);
+}
+
+for (let i = 0; i < 25; i++) {
+    makeMasu(i);
+}
+</script>
+</html>
